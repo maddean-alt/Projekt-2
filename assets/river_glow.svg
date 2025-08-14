@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844">
+  <defs>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="1.4"/>
+    </filter>
+  </defs>
+  <path d="M240 0 C210 60 250 110 220 160 C200 190 150 210 160 260 C170 305 240 340 230 385 C220 430 150 470 160 515 C170 560 240 600 230 650 C220 700 180 725 200 844"
+        fill="none" stroke="#e9ffff" stroke-width="8" stroke-linecap="round" filter="url(#blur)" opacity=".95"/>
+  <!-- sparkles -->
+  <g fill="#ffd47a" opacity=".9">
+    <circle cx="210" cy="190" r="1.6"/><circle cx="175" cy="265" r="1.4"/><circle cx="235" cy="345" r="1.5"/>
+    <circle cx="168" cy="510" r="1.6"/><circle cx="228" cy="610" r="1.7"/><circle cx="195" cy="720" r="1.5"/>
+  </g>
+</svg>
