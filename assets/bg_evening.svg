@@ -1,1 +1,50 @@
 
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844">
+  <defs>
+    <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"  stop-color="#1e3b49"/>
+      <stop offset=".6" stop-color="#17323b"/>
+      <stop offset="1"  stop-color="#0a0f18"/>
+    </linearGradient>
+    <linearGradient id="gHill1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3c6c57"/>
+      <stop offset="1" stop-color="#2a5242"/>
+    </linearGradient>
+    <linearGradient id="gHill2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#457c63"/>
+      <stop offset="1" stop-color="#335a49"/>
+    </linearGradient>
+    <!-- Grain -->
+    <filter id="grain" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0 .08 .18 .08 0"/>
+      </feComponentTransfer>
+    </filter>
+    <!-- Vignette -->
+    <radialGradient id="vig" cx=".5" cy=".18" r=".9">
+      <stop offset=".55" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="1" stop-color="rgba(0,0,0,.45)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sky -->
+  <rect width="390" height="844" fill="url(#gSky)"/>
+
+  <!-- Hills -->
+  <path d="M-10 300 C90 270, 200 290, 400 270 L400 844 L-10 844 Z" fill="url(#gHill2)" opacity=".95"/>
+  <path d="M-10 360 C120 340, 260 360, 400 350 L400 844 L-10 844 Z" fill="url(#gHill1)" opacity=".9"/>
+
+  <!-- Warm speckles -->
+  <g fill="#ffd47a" opacity=".75">
+    <circle cx="60" cy="370" r="1.7"/><circle cx="95" cy="410" r="1.2"/><circle cx="130" cy="380" r="1.5"/>
+    <circle cx="200" cy="360" r="1.4"/><circle cx="230" cy="395" r="1.6"/><circle cx="280" cy="365" r="1.3"/>
+    <circle cx="310" cy="410" r="1.7"/><circle cx="150" cy="430" r="1.1"/><circle cx="260" cy="440" r="1.2"/>
+  </g>
+
+  <!-- Grain overlay -->
+  <rect width="390" height="844" filter="url(#grain)"/>
+  <!-- Vignette -->
+  <rect width="390" height="844" fill="url(#vig)"/>
+</svg>
