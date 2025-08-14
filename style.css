@@ -1,15 +1,9 @@
-/* =========
-   Base / Theme
-   ========= */
+/* Basis */
 :root{
   --bg:#0a0f18;
   --text:#e9eef5;
-  --muted:#9fb0c6;
-  --primary:#27c2f6;     /* Akzent (Button) */
-  --primary-2:#34d17b;   /* Erfolg */
-  --gold:#ffd47a;        /* Glow-Gold */
-  --surface:#0f1724;     /* Karten/HUD */
-  --ring: rgba(255,212,122,.6);
+  --primary:#27c2f6;
+  --gold:#ffd47a;
 }
 
 *{box-sizing:border-box}
@@ -18,107 +12,61 @@ body{
   margin:0;
   background: radial-gradient(150% 120% at 50% -10%, #162740 0%, var(--bg) 60%);
   color:var(--text);
-  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+  font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
 }
 
-/* Scene container (Map) */
-.app{position:relative; max-width:480px; margin:0 auto; padding:16px;}
-.scene{position:relative; width:100%; aspect-ratio:9/16; overflow:hidden; border-radius:18px; background:#0b1420;}
-.layer{position:absolute; inset:0; width:100%; height:100%; object-fit:cover;}
-
+/* Rahmen */
+.wrap{max-width:480px;margin:0 auto;padding:12px;}
+.scene{
+  position:relative;
+  width:100%;
+  aspect-ratio:9/16;           /* erzwingt das Mockup-Format */
+  overflow:hidden;
+  border-radius:18px;
+  background:#0b1420;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
 .vignette::after{
-  content:""; position:absolute; inset:-20%;
-  background: radial-gradient(120% 120% at 50% 20%, transparent 50%, rgba(0,0,0,.35) 90%);
+  content:""; position:absolute; inset:-18%;
   pointer-events:none;
+  background: radial-gradient(120% 110% at 50% 18%, transparent 55%, rgba(0,0,0,.45) 92%);
 }
 
-/* HUD (oben/unten) */
-.hud.top, .hud.bottom{
-  position:absolute; left:0; right:0; padding:12px 14px;
-  display:flex; justify-content:space-between; align-items:center;
-  pointer-events:none;
-}
-.hud.top{ top:0; }
-.hud.bottom{ bottom:0; }
-.hud .btn, .chip{ pointer-events:auto; }
+/* Layer-Bilder (volle Fläche, PNG mit Transparenz) */
+.layer{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 
-/* Title */
-.title{ text-align:center; line-height:1.02; font-weight:800; }
-.title .l1,.title .l2{ display:block; font-size:32px; letter-spacing:.3px;
-  text-shadow: 0 2px 0 rgba(0,0,0,.2), 0 14px 24px rgba(0,0,0,.28);
+/* Feintuning pro Ebene (falls nötig später justieren) */
+.bg{         /* Hintergrund füllt alles */ }
+.river{      /* halbtransparentes PNG über BG */ }
+.trees{      /* Bäume vor dem Fluss */ }
+.house{      /* Haus vor Bäumen, leicht kleiner skaliert möglich */
+  object-fit: contain;
 }
 
-/* Chips (Theme switch) */
-.chip{
-  background: rgba(255,255,255,.08);
-  color:var(--text);
-  padding:8px 10px; border-radius:12px;
-  font-size:.85rem; margin-left:8px; border:0;
-}
-.chip.is-active{ background: rgba(255,255,255,.16); }
-
-/* Buttons */
-.btn{ border:0; border-radius:12px; padding:12px 16px; font-weight:700; color:#fff; }
-.btn.primary{ background: linear-gradient(180deg, var(--primary), #1aa9dd); }
-.btn.secondary{ background: rgba(255,255,255,.12); }
-
-/* Nodes (Milestones) */
-.nodes{ position:absolute; inset:0; }
-.node{
-  position:absolute; left:50%; top:50%;
-  width:64px; height:64px; border-radius:50%;
-  display:grid; place-items:center;
+/* Meilenstein (PNG mit integriertem Glow), frei positionierbar */
+.milestone{
+  position:absolute;
   transform: translate(-50%,-50%);
-  background: rgba(255,255,255,.08);
-  border:0;
+  width: 12%;      /* Größe relativ zur Scene-Breite; bei Bedarf anpassen */
+  height:auto;
+  pointer-events:auto;
 }
-.node.is-active{
-  background: radial-gradient(circle at 50% 40%, #ffe8b1, #ffc35a 70%);
-  box-shadow:
-    0 0 0 2px rgba(255,255,255,.12) inset,
-    0 0 30px 10px rgba(255,200,90,.35);
-  animation: nodePulse 2.2s ease-in-out infinite;
+.milestone.is-active{
+  animation: pulse 2.2s ease-in-out infinite;
 }
-.node.is-inactive{
-  background: radial-gradient(circle at 50% 45%, #7f876b, #525a45);
-  box-shadow: 0 0 0 2px rgba(0,0,0,.25) inset;
-}
-@keyframes nodePulse{
-  0%,100%{ transform: translate(-50%,-50%) scale(1); }
-  50%{ transform: translate(-50%,-50%) scale(1.06); }
-}
-.node-img{ width:100%; height:100%; object-fit:contain; }
-
-/* Avatar placeholder */
-.avatar{
-  position:absolute; left:8%; bottom:7%;
-  width:26%; height:auto; border-radius:18px;
-  image-rendering:auto;
-  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+@keyframes pulse{
+  0%,100%{ transform: translate(-50%,-50%) scale(1);   filter: brightness(1); }
+  50%   { transform: translate(-50%,-50%) scale(1.06); filter: brightness(1.08); }
 }
 
-/* Accessibility message */
-.sr-live{ position:fixed; left:0; right:0; bottom:16px; text-align:center; color:#cfd7e3; font-size:18px; }
-
-/* Pulse utility (for buttons if needed) */
-.pulse{
-  padding:18px 32px; font-size:1.25rem; color:#fff;
-  background: linear-gradient(180deg, var(--primary), #1aa9dd);
-  border-radius:14px; border:0; cursor:pointer;
-  box-shadow:0 10px 24px rgba(39,194,246,.25);
+/* HUD (optional) */
+.hud{
+  display:flex; justify-content:space-between; align-items:center;
+  gap:12px; margin-top:10px;
 }
-@media (prefers-reduced-motion:no-preference){
-  .pulse{ animation: pulseAnim 1.6s ease-in-out infinite; }
-  @keyframes pulseAnim{
-    0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(39,194,246,.6); }
-    50%{ transform:scale(1.06); box-shadow:0 0 18px 10px rgba(39,194,246,0); }
-  }
+.btn{
+  border:0; border-radius:12px; padding:12px 16px; font-weight:700; color:#fff; cursor:pointer;
 }
-
-/* Small devices */
-@media (max-width:380px){
-  .title .l1,.title .l2{ font-size:28px; }
-  .btn{ padding:10px 14px; }
-}
+.btn.primary{ background: linear-gradient(180deg, var(--primary), #1aa9dd); }
+.btn.secondary{ background: rgba(255,255,255,.12); color:#cfe0f2; }
+.btn:disabled{ opacity:.5; cursor:default; }
