@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844">
+  <!-- outer water edge -->
+  <path d="M240 0 C210 60 250 110 220 160 C200 190 150 210 160 260 C170 305 240 340 230 385 C220 430 150 470 160 515 C170 560 240 600 230 650 C220 700 180 725 200 844"
+        fill="none" stroke="#2f6a75" stroke-opacity=".55" stroke-width="64" stroke-linecap="round"/>
+  <!-- main body -->
+  <path d="M240 0 C210 60 250 110 220 160 C200 190 150 210 160 260 C170 305 240 340 230 385 C220 430 150 470 160 515 C170 560 240 600 230 650 C220 700 180 725 200 844"
+        fill="none" stroke="#5a9aa6" stroke-opacity=".95" stroke-width="46" stroke-linecap="round"/>
+  <!-- inner shade -->
+  <path d="M240 0 C210 60 250 110 220 160 C200 190 150 210 160 260 C170 305 240 340 230 385 C220 430 150 470 160 515 C170 560 240 600 230 650 C220 700 180 725 200 844"
+        fill="none" stroke="#164049" stroke-opacity=".35" stroke-width="22" stroke-linecap="round"/>
+</svg>
