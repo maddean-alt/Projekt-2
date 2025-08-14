@@ -1,103 +1,39 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Level Up Life – Map Demo</title>
-  <meta name="description" content="Warme, gemalte Landschaft · Fluss · Meilensteine · Avatar (Platzhalter-Assets)" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Level Up Life</title>
   <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <style>
-    /* Leichte Platzhalteroptik, bis die PNG-Assets kommen */
-    .scene{ background: radial-gradient(140% 120% at 50% 0%, #1e3b49 0%, #162a31 55%, #0a0f18 100%); }
-    /* Fluss- und Glow-Platzhalter als SVG-Data-URIs (tiny) */
-    .river::before{
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 844'><path d='M240 0 C210 60, 250 110, 220 160 C200 190, 150 210, 160 260 C170 305, 240 340, 230 385 C220 430, 150 470, 160 515 C170 560, 240 600, 230 650 C220 700, 180 725, 200 844' fill='none' stroke='%235a9aa6' stroke-width='46' stroke-linecap='round'/><path d='M240 0 C210 60, 250 110, 220 160 C200 190, 150 210, 160 260 C170 305, 240 340, 230 385 C220 430, 150 470, 160 515 C170 560, 240 600, 230 650 C220 700, 180 725, 200 844' fill='none' stroke='%232f6a75' stroke-width='64' stroke-linecap='round' opacity='.5'/></svg>") center/cover no-repeat;
-      filter: none;
-    }
-    .river::after{
-      content:""; position:absolute; inset:0; pointer-events:none;
-      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 844'><path d='M240 0 C210 60, 250 110, 220 160 C200 190, 150 210, 160 260 C170 305, 240 340, 230 385 C220 430, 150 470, 160 515 C170 560, 240 600, 230 650 C220 700, 180 725, 200 844' fill='none' stroke='%23e9ffff' stroke-width='8' stroke-linecap='round' opacity='.95'/></svg>") center/cover no-repeat;
-      animation: riverGlow 2.6s ease-in-out infinite; opacity:.9;
-    }
-    @keyframes riverGlow { 0%,100%{opacity:.7} 50%{opacity:1} }
-
-    /* Avatar Platzhalter (runde Kachel) */
-    #avatar{
-      background: radial-gradient(circle at 50% 40%, #ffd891, #f5a531 75%);
-      border-radius: 18px;
-      width: 24%; aspect-ratio: 1/1; left: 10%; bottom: 10%;
-      box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 28px rgba(255,200,90,.25);
-    }
-
-    /* Milestone-Token Platzhalter */
-    .node{ width:64px;height:64px;border-radius:50%; }
-    .node.is-active{
-      background: radial-gradient(circle at 50% 40%, #ffe8b1, #ffc35a 70%);
-      box-shadow: 0 0 0 2px rgba(255,255,255,.12) inset, 0 0 30px 10px rgba(255,200,90,.35);
-      animation: tokenPulse 2.2s ease-in-out infinite;
-    }
-    .node.is-inactive{
-      background: radial-gradient(circle at 50% 45%, #7f876b, #525a45);
-      box-shadow: 0 0 0 2px rgba(0,0,0,.25) inset;
-    }
-    @keyframes tokenPulse{
-      0%,100%{ transform: translate(-50%,-50%) scale(1); }
-      50%{ transform: translate(-50%,-50%) scale(1.06); }
-    }
-
-    /* Titel */
-    .title{
-      pointer-events:none;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-weight: 700;
-      text-align:center; line-height:1.02;
-      text-shadow: 0 2px 0 rgba(0,0,0,.2), 0 14px 24px rgba(0,0,0,.28);
-    }
-    .title .l1,.title .l2{ display:block; font-size: 32px; letter-spacing:.3px; }
-  </style>
 </head>
-<body data-theme="evening">
-  <div class="app">
-    <div class="scene vignette">
-      <!-- Layer: Hintergrund (Platzhalter: nur Gradient) -->
-      <img id="bg" class="layer bg" alt="" aria-hidden="true" />
+<body>
 
-      <!-- Layer: Fluss + Glow (Platzhalter-SVGs via CSS ::before/::after) -->
-      <div class="layer river" aria-hidden="true"></div>
+  <div class="scene">
+    <!-- Hintergrund -->
+    <img id="bg" class="layer bg" alt="" src="assets/bg_evening.svg" />
 
-      <!-- Objekte-Layer (kommt später mit PNGs Haus/Bäume) -->
-      <div class="objects layer" aria-hidden="true"></div>
+    <!-- Fluss & Glow -->
+    <img id="river" class="layer river" alt="" src="assets/river.svg" />
+    <img id="riverGlow" class="layer glow" alt="" src="assets/river_glow.svg" />
 
-      <!-- Nodes -->
-      <div id="nodes" class="nodes" aria-label="Meilensteine"></div>
+    <!-- Meilensteine -->
+    <div class="nodes">
+      <div class="node active" data-node="1">1</div>
+      <div class="node" data-node="2">2</div>
+      <div class="node" data-node="3">3</div>
+    </div>
 
-      <!-- Avatar -->
-      <div id="avatar" class="avatar layer" role="img" aria-label="Avatar (Platzhalter)"></div>
+    <!-- Avatar -->
+    <div class="avatar">🙂</div>
 
-      <!-- HUD oben -->
-      <header class="hud top">
-        <div class="title">
-          <span class="l1">7 rauchfreie</span>
-          <span class="l2">Tage</span>
-        </div>
-        <div class="theme-switch" role="group" aria-label="Stimmung">
-          <button class="chip" data-theme="day" aria-pressed="false">Tag</button>
-          <button class="chip is-active" data-theme="evening" aria-pressed="true">Abend</button>
-          <button class="chip" data-theme="night" aria-pressed="false">Nacht</button>
-        </div>
-      </header>
-
-      <!-- HUD unten -->
-      <footer class="hud bottom">
-        <button id="prev" class="btn secondary" type="button">Zurück</button>
-        <button id="next" class="btn primary" type="button">Weiter</button>
-      </footer>
+    <!-- HUD -->
+    <div class="hud">
+      <button id="prevNode">◀</button>
+      <span id="nodeLabel">Meilenstein 1</span>
+      <button id="nextNode">▶</button>
     </div>
   </div>
 
-  <!-- Accessibility live region -->
-  <div class="sr-live" aria-live="polite" aria-atomic="true"></div>
+  <script src="script.js"></script>
 </body>
 </html>
