@@ -1,13 +1,20 @@
+// Warten, bis die Seite geladen ist
 document.addEventListener("DOMContentLoaded", () => {
-    const elements = document.querySelectorAll(".pulse");
+    const button = document.querySelector(".pulse");
 
-    elements.forEach(el => {
-        el.style.transition = "transform 0.6s ease-in-out";
-        setInterval(() => {
-            el.style.transform = "scale(1.05)";
-            setTimeout(() => {
-                el.style.transform = "scale(1)";
-            }, 300);
-        }, 1000);
+    if (!button) {
+        console.error("Button nicht gefunden!");
+        return;
+    }
+
+    // Klick-Event
+    button.addEventListener("click", () => {
+        alert("Du hast den Button geklickt!");
+        
+        // Beispiel: Buttonfarbe kurz ändern
+        button.style.backgroundColor = "#34d17b";
+        setTimeout(() => {
+            button.style.backgroundColor = "#27c2f6";
+        }, 500);
     });
 });
