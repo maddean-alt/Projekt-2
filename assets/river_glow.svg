@@ -1,14 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844">
   <defs>
-    <filter id="blur">
-      <feGaussianBlur stdDeviation="1.4"/>
-    </filter>
+    <filter id="blur1"><feGaussianBlur stdDeviation="1.8"/></filter>
+    <filter id="blur2"><feGaussianBlur stdDeviation="3.2"/></filter>
   </defs>
+
+  <!-- soft main glow -->
   <path d="M240 0 C210 60 250 110 220 160 C200 190 150 210 160 260 C170 305 240 340 230 385 C220 430 150 470 160 515 C170 560 240 600 230 650 C220 700 180 725 200 844"
-        fill="none" stroke="#e9ffff" stroke-width="8" stroke-linecap="round" filter="url(#blur)" opacity=".95"/>
-  <!-- sparkles -->
+        fill="none" stroke="#bdf8ff" stroke-width="16" stroke-linecap="round" opacity=".35" filter="url(#blur2)"/>
+
+  <!-- bright center streak -->
+  <path d="M240 0 C210 60 250 110 220 160 C200 190 150 210 160 260 C170 305 240 340 230 385 C220 430 150 470 160 515 C170 560 240 600 230 650 C220 700 180 725 200 844"
+        fill="none" stroke="#eaffff" stroke-width="6" stroke-linecap="round" opacity=".95" filter="url(#blur1)"/>
+
+  <!-- warm sparkles -->
   <g fill="#ffd47a" opacity=".9">
-    <circle cx="210" cy="190" r="1.6"/><circle cx="175" cy="265" r="1.4"/><circle cx="235" cy="345" r="1.5"/>
-    <circle cx="168" cy="510" r="1.6"/><circle cx="228" cy="610" r="1.7"/><circle cx="195" cy="720" r="1.5"/>
+    <circle cx="214" cy="170" r="1.5"/><circle cx="176" cy="254" r="1.4"/><circle cx="236" cy="342" r="1.6"/>
+    <circle cx="168" cy="506" r="1.6"/><circle cx="228" cy="608" r="1.8"/><circle cx="196" cy="722" r="1.6"/>
   </g>
 </svg>
