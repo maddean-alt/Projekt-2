@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Level Up Life – Look-Lock Testbuild</title>
+  <meta name="description" content="Mobile Demo: warme, gemalte Landschaft mit Fluss, Glow, Meilensteinen & Avatar." />
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+<body data-theme="evening">
+  <noscript>
+    <div class="noscript">Bitte JavaScript aktivieren, um die Demo zu sehen.</div>
+  </noscript>
+
+  <div class="app" id="app">
+    <!-- Szene-Layer (werden über CSS exakt gestapelt) -->
+    <div class="scene">
+      <!-- Hintergrund (Tageszeiten werden per JS/CSS gewechselt) -->
+      <img id="bg" class="layer bg" alt="Hintergrund" src="assets/bg_evening.png" />
+
+      <!-- Fluss & Glow (separate Assets, damit wir animieren können) -->
+      <img id="river" class="layer river" alt="Fluss" src="assets/river.png" />
+      <img id="riverGlow" class="layer glow" alt="" src="assets/river_glow.png" />
+
+      <!-- Optional: Objekte (Haus/Bäume) – kommen als eigene PNGs, Layer bleibt schon da -->
+      <div class="objects">
+        <!-- Bäume/Haus werden hier später per <img> eingefügt -->
+      </div>
+
+      <!-- Meilensteine (aktiv/inaktiv) -->
+      <div id="nodes" class="nodes" aria-label="Meilensteine">
+        <!-- JS platziert hier <button> mit <img src="assets/milestone_active.png|milestone_inactive.png"> -->
+      </div>
+
+      <!-- Avatar -->
+      <img id="avatar" class="avatar" alt="Avatar" src="assets/avatar_evening.png" />
+    </div>
+
+    <!-- HUD / UI -->
+    <header class="hud top">
+      <div class="title">
+        <span class="l1">7 rauchfreie</span>
+        <span class="l2">Tage</span>
+      </div>
+
+      <!-- Theme-Switch (Tag/Abend/Nacht) -->
+      <div class="theme-switch" role="group" aria-label="Stimmung">
+        <button class="chip" data-theme="day" aria-pressed="false" title="Tag">Tag</button>
+        <button class="chip is-active" data-theme="evening" aria-pressed="true" title="Abend">Abend</button>
+        <button class="chip" data-theme="night" aria-pressed="false" title="Nacht">Nacht</button>
+      </div>
+    </header>
+
+    <footer class="hud bottom">
+      <button id="prev" class="btn secondary" type="button" aria-label="Vorheriger Schritt">Zurück</button>
+      <button id="next" class="btn primary" type="button" aria-label="Nächster Schritt">Weiter</button>
+    </footer>
+  </div>
+
+  <!-- Accessibility live region (für Statusmeldungen) -->
+  <div class="sr-live" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Inline Template für Node-Button (wird von script.js geklont) -->
+  <template id="tpl-node">
+    <button class="node" type="button" aria-pressed="false">
+      <img class="node-img" alt="" />
+      <span class="node-label" aria-hidden="true"></span>
+    </button>
+  </template>
+</body>
+</html>
